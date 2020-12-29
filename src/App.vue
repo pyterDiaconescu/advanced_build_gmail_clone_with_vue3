@@ -6,7 +6,7 @@
       <tr
           v-for="email in emails"
           :key="email.id"
-          class="clickable"
+          :class="['clickable', email.read ? 'read' : '']"
       >
         <td><input type="checkbox"></td>
         <td>{{ email.from }}</td>
