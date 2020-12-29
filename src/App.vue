@@ -15,6 +15,9 @@
           <p><strong>{{ email.subject}}</strong> - {{ email.body }}</p>
         </td>
         <td>{{ format(new Date(email.sentAt), 'MMM do yyyy') }}</td>
+        <td>
+          <button @click="email.archived = true">Archive</button>
+        </td>
       </tr>
     </tbody>
   </table>
