@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import {format} from "date-fns";
+import {format} from "date-fns"
+import {ref} from 'vue'
 
 export default {
   name: "MailTable",
@@ -30,7 +31,7 @@ export default {
     await new Promise(resolve => setTimeout(resolve, 3000))
     return {
       format,
-      "emails": [
+      "emails": ref([
         {
           "id": 1,
           "from": "team@vuemastery.com",
@@ -67,7 +68,7 @@ export default {
           "archived": true,
           "read": false
         }
-      ]
+      ])
     }
   },
   computed: {
