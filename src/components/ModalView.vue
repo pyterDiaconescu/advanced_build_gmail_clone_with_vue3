@@ -27,6 +27,7 @@ let useKeydown = (keyPress, fn) => {
 export default {
   setup(props, {emit}) {
     useKeydown( 'Escape', () => { emit('closeModal') })
+    useKeydown('Enter', () => { console.log('A second function')} )
 
     return {
       emit
