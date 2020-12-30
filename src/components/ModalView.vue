@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <div class="overlay"></div>
+    <div class="overlay" @click="emit('closeModal')"></div>
     <div class="modal-card">
       <slot />
     </div>
@@ -9,7 +9,11 @@
 
 <script>
 export default {
-  name: "ModalView"
+  setup(props, {emit}) {
+    return {
+      emit
+    }
+  }
 }
 </script>
 
