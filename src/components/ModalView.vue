@@ -10,12 +10,12 @@
 <script>
 import { onBeforeUnmount } from 'vue'
 
-let useKeydown = (keyPress, fn) => {
+let useKeydown = (keyCombos) => {
   let onKeydown = (event) => {
     console.log(event.key)
-
-    if (event.key === keyPress){
-      fn()
+    let kc = keyCombos.find(kc => kc.key == event.key)
+    if (kc){
+      kc.fn()
     }
   }
   window.addEventListener('keydown', onKeydown)
@@ -26,8 +26,10 @@ let useKeydown = (keyPress, fn) => {
 }
 export default {
   setup(props, {emit}) {
-    useKeydown( 'Escape', () => { emit('closeModal') })
-    useKeydown('Enter', () => { console.log('A second function')} )
+    useKeydown( [
+      { key: 'Escape', fn: () => { emit('closeModal') }},
+      { key: 'Enter', fn: () => { console.log('A second function')} }
+    ])
 
     return {
       emit
