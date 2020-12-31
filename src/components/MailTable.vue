@@ -6,7 +6,13 @@
       :key="email.id"
       :class="['clickable', email.read ? 'read' : '']"
     >
-      <td><input type="checkbox"></td>
+      <td>
+        <input
+          type="checkbox"
+          :selected="emailSelection.toggle(email)"
+          @click="emailSelection.emails.has(email)"
+        >
+      </td>
       <td @click="openEmail(email)">{{ email.from }}</td>
       <td @click="openEmail(email)">
         <p><strong>{{ email.subject}}</strong> - {{ email.body }}</p>
@@ -38,6 +44,17 @@ export default {
   },
   async setup(){
     let { data: emails } = await axios.get('http://localhost:3000/emails')
+
+    let emailSelection = {
+      emails: [],
+      toggle(email) {
+        if(inSelectedList) {
+          removeFromList
+        } else {
+          addToList
+        }
+      }
+    }
 
     return {
       format,
