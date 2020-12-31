@@ -1,4 +1,5 @@
 <template>
+  <BulkActionBar :emails="unarchivedEmails"/>
   <table class="mail-table">
     <tbody>
     <tr
@@ -36,12 +37,14 @@ import { ref } from 'vue';
 import MailView from '@/components/MailView'
 import ModalView from '@/components/ModalView'
 import useEmailSelection from '@/composables/use-email-selection'
+import BulkActionBar from '@/components/BulkActionBar'
 
 export default {
   name: "MailTable",
   components: {
     MailView,
-    ModalView
+    ModalView,
+    BulkActionBar
   },
   async setup(){
     let { data: emails } = await axios.get('http://localhost:3000/emails')
