@@ -68,6 +68,7 @@ export default {
     return {
       format,
       marked,
+      emit,
       toggleRead,
       toggleArchive,
       goNewer,
