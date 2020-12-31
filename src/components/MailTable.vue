@@ -10,7 +10,7 @@
       <td>
         <input
           type="checkbox"
-          :selected="emailSelection.emails.has(email)"
+          :checked="emailSelection.emails.has(email)"
           @click="emailSelection.toggle(email)"
         >
       </td>
