@@ -1,4 +1,5 @@
 <template>
+  <h1>{{ emailSelection.emails.size }} emails selected</h1>
   <table class="mail-table">
     <tbody>
     <tr
@@ -9,8 +10,8 @@
       <td>
         <input
           type="checkbox"
-          :selected="emailSelection.toggle(email)"
-          @click="emailSelection.emails.has(email)"
+          :selected="emailSelection.emails.has(email)"
+          @click="emailSelection.toggle(email)"
         >
       </td>
       <td @click="openEmail(email)">{{ email.from }}</td>
@@ -45,19 +46,23 @@ export default {
   async setup(){
     let { data: emails } = await axios.get('http://localhost:3000/emails')
 
+    let selected = new Set()
     let emailSelection = {
-      emails: [],
+      emails: selected,
       toggle(email) {
-        if(inSelectedList) {
-          removeFromList
+        if(selected.has(email)) {
+          selected.delete(email)
         } else {
-          addToList
+          selected.add(email)
         }
+
+        console.log(selected)
       }
     }
 
     return {
       format,
+      emailSelection,
       emails: ref(emails),
       openedEmail: null
     }
