@@ -10,15 +10,20 @@
 
 <script>
 import useEmailSelection from '@/composables/use-email-selection'
+import { computed } from 'vue'
 
 export default {
   setup(props){
     let emailSelection = useEmailSelection()
-    let numberSelected = emailSelection.emails.size
+    let numberSelected = computed(() => emailSelection.emails.size)
     let numberEmails = props.emails.length
+    let allEmailsSelected = computed(() => numberSelected.value === numberEmails)
+    let someEmailsSelected = computed(() => {
+      return numberSelected.value > 0 && numberSelected.value < numberEmails
+    })
     return {
-      allEmailsSelected: numberSelected === numberEmails,
-      someEmailsSelected: numberSelected > 0 && numberSelected < numberEmails
+      allEmailsSelected,
+      someEmailsSelected
     }
   },
   props: {
