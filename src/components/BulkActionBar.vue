@@ -12,11 +12,13 @@
 import useEmailSelection from '@/composables/use-email-selection'
 
 export default {
-  setup(){
+  setup(props){
+    let emailSelection = useEmailSelection()
+    let numberSelected = emailSelection.emails.size
+    let numberEmails = props.emails.length
     return {
-      emailSelection: useEmailSelection(),
-      allEmailsSelected,
-      someEmailsSelected
+      allEmailsSelected: numberSelected === numberEmails,
+      someEmailsSelected: numberSelected > 0 && numberSelected < numberEmails
     }
   },
   props: {
