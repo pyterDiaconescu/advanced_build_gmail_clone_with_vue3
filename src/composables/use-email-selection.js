@@ -1,7 +1,8 @@
 import {reactive} from "vue";
 
+let emails = reactive(new Set())
+
 export const useEmailSelection = function() {
-  let emails = reactive(new Set())
 
   let toggle = (email) => {
     if (emails.has(email)) {
