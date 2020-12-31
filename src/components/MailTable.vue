@@ -58,9 +58,11 @@ export default {
   },
   methods: {
     openEmail(email) {
-      email.read = true;
-      this.updateEmail(email)
       this.openedEmail = email
+      if(email) {
+        email.read = true;
+        this.updateEmail(email)
+      }
     },
     archiveEmail(email) {
       email.archived = true
