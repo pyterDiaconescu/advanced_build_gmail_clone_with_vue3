@@ -36,6 +36,7 @@ import axios from 'axios'
 
 import MailView from '@/components/MailView'
 import ModalView from '@/components/ModalView'
+import { ref } from 'vue'
 import useEmailSelection from '@/composables/use-email-selection'
 import BulkActionBar from '@/components/BulkActionBar'
 
@@ -52,8 +53,8 @@ export default {
     return {
       format,
       emailSelection: useEmailSelection(),
-      emails,
-      openedEmail: null
+      emails: ref(emails),
+      openedEmail: ref(null)
     }
   },
   computed: {
