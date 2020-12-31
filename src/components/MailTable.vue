@@ -20,7 +20,7 @@
     </tbody>
   </table>
   <ModalView v-if="openedEmail" @closeModal="openedEmail=null">
-    <MailView :email="openedEmail" />
+    <MailView :email="openedEmail" @changeEmail="changeEmail"/>
   </ModalView>
 </template>
 
@@ -66,6 +66,7 @@ export default {
       email.archived = true
       this.updateEmail(email)
     },
+    changeEmail(){},
     updateEmail(email){
       axios.put(`http://localhost:3000/emails/${email.id}`, email)
     }
