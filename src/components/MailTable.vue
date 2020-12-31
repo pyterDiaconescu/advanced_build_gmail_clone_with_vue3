@@ -33,7 +33,7 @@
 <script>
 import {format} from "date-fns"
 import axios from 'axios'
-import { ref } from 'vue';
+
 import MailView from '@/components/MailView'
 import ModalView from '@/components/ModalView'
 import useEmailSelection from '@/composables/use-email-selection'
@@ -52,7 +52,7 @@ export default {
     return {
       format,
       emailSelection: useEmailSelection(),
-      emails: ref(emails),
+      emails,
       openedEmail: null
     }
   },
