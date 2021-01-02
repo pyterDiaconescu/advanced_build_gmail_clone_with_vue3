@@ -1,12 +1,12 @@
 <template>
   <button
-      @click="selectedScreen = 'inbox'"
+      @click="selectScreen('inbox')"
       :disabled="selectedScreen == 'inbox'"
   >
     Inbox
   </button>
   <button
-      @click="selectedScreen = 'archive'"
+      @click="selectScreen('archive')"
       :disabled="selectedScreen == 'archive'"
   >
     Archived
@@ -85,6 +85,10 @@ export default {
     }
   },
   methods: {
+    selectScreen(newScreen){
+      this.selectedScreen = newScreen;
+      this.emailSelection.clear()
+    },
     openEmail(email) {
       this.openedEmail = email
       if(email) {
