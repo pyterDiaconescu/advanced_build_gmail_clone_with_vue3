@@ -1,9 +1,21 @@
 <template>
-  <BulkActionBar :emails="unarchivedEmails"/>
+  <button
+      @click="selectedScreen = 'inbox'"
+      :disabled="selectedScreen == 'inbox'"
+  >
+    Inbox
+  </button>
+  <button
+      @click="selectedScreen = 'archive'"
+      :disabled="selectedScreen == 'archive'"
+  >
+    Archived
+  </button>
+  <BulkActionBar :emails="filteredEmails"/>
   <table class="mail-table">
     <tbody>
     <tr
-      v-for="email in unarchivedEmails"
+      v-for="email in filteredEmails"
       :key="email.id"
       :class="['clickable', email.read ? 'read' : '']"
     >
@@ -54,7 +66,8 @@ export default {
       format,
       emailSelection: useEmailSelection(),
       emails: ref(emails),
-      openedEmail: ref(null)
+      openedEmail: ref(null),
+      selectedScreen: ref('inbox')
     }
   },
   computed: {
@@ -63,8 +76,12 @@ export default {
         return e1.sentAt < e2.sentAt
       })
     },
-    unarchivedEmails() {
-      return this.sortedEmails.filter(e => !e.archived)
+    filteredEmails() {
+      if (this.selectedScreen == 'inbox'){
+        return this.sortedEmails.filter(e => !e.archived)
+      } else {
+        return this.sortedEmails.filter(e => e.archived)
+      }
     }
   },
   methods: {
@@ -88,7 +105,7 @@ export default {
       if(closeModal) { this.openedEmail = null }
 
       if(changeIndex) {
-        let emails = this.unarchivedEmails
+        let emails = this.filteredEmails
         let currentIndex = emails.indexOf(this.openedEmail)
         let newEmail = emails[currentIndex+changeIndex];
         this.openEmail(newEmail);
